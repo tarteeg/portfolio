@@ -9,7 +9,9 @@ try {
 
 document.getElementById('theme').addEventListener('click', () => {
   const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  root.classList.add('theme-fade');
   root.dataset.theme = next;
+  setTimeout(() => root.classList.remove('theme-fade'), 900);
   try { localStorage.setItem('theme', next); } catch (_) {}
 });
 

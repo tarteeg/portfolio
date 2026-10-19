@@ -1,13 +1,13 @@
 :root {
   --maxw: 1160px;
-  --bg: #ebe7dd;
-  --surface: #f5f2ea;
+  --bg: #dcd8cd;
+  --surface: #e8e5db;
   --text: #222a35;
-  --muted: #5b6676;
-  --border: #d5d0c3;
+  --muted: #535d6c;
+  --border: #c5c0b2;
   --accent: #2f5d8a;
   --accent-2: #c9702b;
-  --accent-soft: #dce5ec;
+  --accent-soft: #cfd9e0;
   --shadow: 0 4px 20px rgba(20, 30, 50, .07);
 }
 :root[data-theme="dark"] {
@@ -361,3 +361,6 @@ section:not(.hero) .section-intro { margin-left: auto; margin-right: auto; text-
 }
 html { cursor: var(--cur-default); }
 a, button, summary, label, select, [role="button"], .tl-card, .copy-mail { cursor: var(--cur-pointer) !important; }
+
+/* Transition douce lors du changement de thème */
+.theme-fade, .theme-fade * { transition: background-color .8s ease, color .8s ease, border-color .8s ease, box-shadow .8s ease !important; }
