@@ -15,6 +15,35 @@ document.getElementById('theme').addEventListener('click', () => {
   try { localStorage.setItem('theme', next); } catch (_) {}
 });
 
+// Changement de langue : on reste à la même position (même section, même avancement)
+(() => {
+  const sections = [...document.querySelectorAll('main > section')];
+  const top = sec => sec.getBoundingClientRect().top + scrollY;
+  const link = document.querySelector('.lang-switch a');
+  const KEY = 'langScroll';
+  if (link) link.addEventListener('click', () => {
+    const y = scrollY;
+    let i = sections.findIndex(sec => top(sec) + sec.offsetHeight > y + 1);
+    if (i < 0) i = sections.length - 1;
+    const sec = sections[i];
+    const ratio = Math.min(Math.max((y - top(sec)) / sec.offsetHeight, 0), 1);
+    try { sessionStorage.setItem(KEY, JSON.stringify({ i, ratio, t: Date.now() })); } catch (_) {}
+  });
+  let saved = null;
+  try {
+    saved = JSON.parse(sessionStorage.getItem(KEY));
+    sessionStorage.removeItem(KEY);
+  } catch (_) {}
+  if (!saved || Date.now() - saved.t > 10000 || !sections[saved.i]) return;
+  const restore = () => {
+    const sec = sections[saved.i];
+    scrollTo({ top: top(sec) + saved.ratio * sec.offsetHeight, behavior: 'instant' });
+  };
+  history.scrollRestoration = 'manual';
+  restore();
+  addEventListener('load', restore);
+})();
+
 // Apparition au scroll
 const items = document.querySelectorAll('section h2, .card, .project, .job, .edu article, .skills > div, .interests > div, .stats');
 items.forEach(el => el.classList.add('reveal'));
