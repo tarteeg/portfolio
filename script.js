@@ -145,51 +145,6 @@ document.querySelectorAll('.copy-mail').forEach(btn => {
   btn.addEventListener('blur', reset);
 });
 
-// Curseur personnalisé (souris uniquement)
-(() => {
-  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const dot = document.createElement('div');
-  const ring = document.createElement('div');
-  dot.className = 'cursor-dot';
-  ring.className = 'cursor-ring';
-  dot.setAttribute('aria-hidden', 'true');
-  ring.setAttribute('aria-hidden', 'true');
-  document.body.append(ring, dot);
-
-  const clickable = 'a, button, summary, input, select, textarea, label, [role="button"], .tl-card';
-  let mx = -100, my = -100, rx = -100, ry = -100, started = false;
-
-  const draw = () => {
-    dot.style.transform = `translate3d(${mx}px, ${my}px, 0)`;
-    ring.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
-  };
-  const loop = () => {
-    rx += (mx - rx) * 0.5;
-    ry += (my - ry) * 0.5;
-    draw();
-    requestAnimationFrame(loop);
-  };
-
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    if (!started) {
-      started = true;
-      rx = mx; ry = my;
-      document.documentElement.classList.add('has-cursor');
-      if (!reduce) requestAnimationFrame(loop);
-    }
-    if (reduce) { rx = mx; ry = my; draw(); }
-    document.documentElement.classList.remove('cursor-hidden');
-    const hovering = !!e.target.closest(clickable);
-    ring.classList.toggle('is-hover', hovering);
-    dot.classList.toggle('is-hover', hovering);
-  });
-  document.addEventListener('mousedown', () => ring.classList.add('is-down'));
-  document.addEventListener('mouseup', () => ring.classList.remove('is-down'));
-  document.documentElement.addEventListener('mouseleave', () => document.documentElement.classList.add('cursor-hidden'));
-})();
-
 // Fond : constellation de particules avec parallaxe (défilement + souris)
 (() => {
   const canvas = document.createElement('canvas');
