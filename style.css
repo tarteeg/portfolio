@@ -1,5 +1,18 @@
+/* Polices hébergées localement (Geist, Geist Mono, Instrument Serif · licence OFL) */
+@font-face { font-family: 'Geist'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('assets/fonts/Geist-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Geist'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('assets/fonts/Geist-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Geist Mono'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('assets/fonts/GeistMono-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Geist Mono'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('assets/fonts/GeistMono-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Instrument Serif'; font-style: italic; font-weight: 400; font-display: swap; src: url('assets/fonts/InstrumentSerif-Italic-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Instrument Serif'; font-style: italic; font-weight: 400; font-display: swap; src: url('assets/fonts/InstrumentSerif-Italic-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/InstrumentSerif-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/InstrumentSerif-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
 :root {
   --maxw: 1160px;
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-body: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --bg: #dcd8cd;
   --surface: #e8e5db;
   --text: #222a35;
@@ -26,13 +39,15 @@
 html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
 body {
   margin: 0;
-  font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font: 16px/1.6 var(--font-body);
   background: var(--bg);
   color: var(--text);
 }
 a { color: var(--accent); }
 h1, h2, h3 { line-height: 1.2; margin: 0 0 .5rem; }
-h2 { font-size: 1.9rem; margin-bottom: 1.6rem; }
+h1, h2 { font-family: var(--font-display); font-weight: 400; letter-spacing: -.02em; line-height: 1.1; }
+h3 { font-family: var(--font-body); font-weight: 600; }
+h2 { font-size: clamp(2rem, 4vw, 2.6rem); margin-bottom: 1.6rem; }
 h2:has(+ .section-intro) { margin-bottom: .4rem; }
 h3 { font-size: 1.1rem; }
 p { margin: 0 0 .8rem; }
@@ -50,8 +65,8 @@ section { padding: 2rem 0 1rem; }
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
-.brand { font-weight: 700; color: var(--text); text-decoration: none; margin-right: auto; }
-.nav nav { display: flex; gap: .3rem; }
+.brand { font-family: var(--font-display); letter-spacing: -.02em; font-size: 1.5rem; line-height: 1; color: var(--text); text-decoration: none; }
+.nav nav { display: flex; flex: 1; justify-content: space-evenly; gap: .3rem; }
 .nav nav a { color: var(--muted); text-decoration: none; font-size: .95rem; }
 .nav nav a:hover { color: var(--accent); }
 #theme {
@@ -65,9 +80,9 @@ section { padding: 2rem 0 1rem; }
   padding-top: 4rem; min-height: calc(100vh - 3.7rem); min-height: calc(100svh - 3.7rem);
 }
 .eyebrow { color: var(--accent-2); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; font-size: .8rem; }
-.hero h1 { font-size: clamp(2.6rem, 6vw, 4rem); letter-spacing: -.02em; }
+.hero h1 { font-size: clamp(3.2rem, 7vw + 1rem, 5.5rem); line-height: .95; }
 .tagline { font-size: 1.35rem; color: var(--text); margin-bottom: 1rem; }
-.tagline em { color: var(--accent); font-style: normal; font-weight: 700; }
+.tagline em { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 1.2em; color: var(--accent); }
 /* Grand écran : la phrase d'accroche tient sur une ligne, à taille normale */
 @media (min-width: 1100px) {
   .hero { grid-template-columns: 1.7fr 1fr; }
@@ -121,7 +136,7 @@ section { padding: 2rem 0 1rem; }
 
 .chips { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; margin: .8rem 0 0; }
 .chips li {
-  font-size: .8rem; padding: .2rem .65rem; border-radius: 99px;
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: .8rem; padding: .2rem .65rem; border-radius: 99px;
   background: var(--accent-soft); color: var(--accent); border: 1px solid transparent;
 }
 
@@ -131,7 +146,7 @@ section { padding: 2rem 0 1rem; }
 .project { transition: transform .2s; }
 .project:hover { transform: translateY(-3px); }
 .project header { margin-bottom: .6rem; }
-.meta { color: var(--muted); font-size: .88rem; margin: 0; }
+.meta { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--muted); font-size: .8rem; margin: 0; }
 .project li { margin-bottom: .3rem; }
 
 /* Timeline */
@@ -146,7 +161,7 @@ section { padding: 2rem 0 1rem; }
   display: inline-block; font-weight: 700; font-size: .85rem; padding: .2rem .7rem; margin: .6rem 0 .3rem;
   border-radius: 8px; background: color-mix(in srgb, var(--accent-2) 16%, transparent); color: var(--accent-2);
 }
-code { background: var(--accent-soft); padding: .1rem .4rem; border-radius: 5px; font-size: .9em; }
+code { font-family: var(--font-mono); font-variant-numeric: tabular-nums; background: var(--accent-soft); padding: .1rem .4rem; border-radius: 5px; font-size: .8rem; }
 
 /* Education */
 .edu { display: grid; gap: 1rem; }
@@ -289,9 +304,9 @@ section:not(.hero) .section-intro { margin-left: auto; margin-right: auto; text-
   border-left: 4px solid var(--c); border-radius: 12px; transition: box-shadow .2s, transform .2s;
 }
 .tl-card:hover, .tl-item.open .tl-card { box-shadow: var(--shadow); transform: translateX(3px); }
-.tl-when { grid-column: 1; color: var(--c); font-size: .8rem; font-weight: 700; letter-spacing: .02em; }
+.tl-when { grid-column: 1; font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--c); font-size: .8rem; font-weight: 500; }
 .tl-title { grid-column: 1; font-weight: 700; }
-.tl-sub { grid-column: 1; color: var(--muted); font-size: .88rem; }
+.tl-sub { grid-column: 1; font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--muted); font-size: .8rem; }
 .tl-type {
   grid-column: 2; grid-row: 1 / span 3; align-self: center; font-size: .72rem; font-weight: 700;
   padding: .15rem .6rem; border-radius: 99px; color: var(--c);
