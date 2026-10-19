@@ -6,7 +6,7 @@ const systemDark = matchMedia('(prefers-color-scheme: dark)');
 const themeMeta = document.querySelector('meta[name="theme-color"]');
 const applyTheme = theme => {
   root.dataset.theme = theme;
-  if (themeMeta) themeMeta.content = getComputedStyle(document.body).backgroundColor;
+  if (themeMeta) themeMeta.content = theme === 'dark' ? '#11161d' : '#dcd8cd';
 };
 let manual = null;
 try { manual = sessionStorage.getItem('theme'); localStorage.removeItem('theme'); } catch (_) {}
@@ -15,9 +15,7 @@ systemDark.addEventListener('change', e => { if (!manual) applyTheme(e.matches ?
 
 document.getElementById('theme').addEventListener('click', () => {
   manual = root.dataset.theme === 'dark' ? 'light' : 'dark';
-  root.classList.add('theme-fade');
   applyTheme(manual);
-  setTimeout(() => root.classList.remove('theme-fade'), 900);
   try { sessionStorage.setItem('theme', manual); } catch (_) {}
 });
 
@@ -199,8 +197,11 @@ document.querySelectorAll('.copy-mail').forEach(btn => {
   const mouse = { x: 0, y: 0, nx: 0, ny: 0, active: false, hover: false };
   let smoothNx = 0, smoothNy = 0, lastScroll = 0, raf = 0;
 
+  // Les variables @property <color> sont renvoyées en rgb(...) ; on accepte aussi l'hexadécimal
   const hex = v => {
-    v = v.trim().replace('#', '');
+    v = v.trim();
+    if (v.startsWith('rgb')) return v.match(/[\d.]+/g).slice(0, 3).map(Number);
+    v = v.replace('#', '');
     if (v.length === 3) v = v.split('').map(c => c + c).join('');
     return [0, 2, 4].map(i => parseInt(v.slice(i, i + 2), 16));
   };
@@ -228,7 +229,9 @@ document.querySelectorAll('.copy-mail').forEach(btn => {
 
   const wrap = (v, max) => ((v % max) + max) % max;
 
+  let themeUntil = 0;
   const frame = () => {
+    if (performance.now() < themeUntil) readColors();
     const sy = window.scrollY;
     smoothNx += (mouse.nx - smoothNx) * 0.06;
     smoothNy += (mouse.ny - smoothNy) * 0.06;
@@ -289,7 +292,7 @@ document.querySelectorAll('.copy-mail').forEach(btn => {
   readColors(); build(); start();
   window.addEventListener('resize', () => { build(); if (reduce) start(); });
   document.addEventListener('visibilitychange', () => { if (!document.hidden) start(); });
-  new MutationObserver(() => { readColors(); if (reduce) start(); })
+  new MutationObserver(() => { themeUntil = performance.now() + 1000; readColors(); start(); })
     .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   if (reduce) window.addEventListener('scroll', start, { passive: true });
 
