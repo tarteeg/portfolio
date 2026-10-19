@@ -23,7 +23,9 @@
   --accent-soft: #cfd9e0;
   --shadow: 0 4px 20px rgba(20, 30, 50, .07);
 }
+:root { color-scheme: light; }
 :root[data-theme="dark"] {
+  color-scheme: dark;
   --bg: #11161d;
   --surface: #1a212b;
   --text: #e7ebf1;
@@ -190,7 +192,7 @@ section.in-view::before { transform: scaleX(1); }
 section:not(.hero) h2 { text-align: center; }
 section:not(.hero) .section-intro { margin-left: auto; margin-right: auto; text-align: center; }
 .filters { justify-content: center; }
-.nav nav a { padding: .3rem .7rem; border-radius: 99px; transition: color .2s, background .2s; }
+.nav nav a { flex: 1 1 0; max-width: 7.5rem; text-align: center; padding: .3rem 0; border-radius: 99px; transition: color .2s, background .2s; }
 .nav nav a.active { color: #fff; background: var(--accent); }
 :root[data-theme="dark"] .nav nav a.active { color: #0d1218; }
 .progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 20; background: var(--accent-2); transform: scaleX(0); transform-origin: left; pointer-events: none; }
@@ -207,6 +209,7 @@ section:not(.hero) .section-intro { margin-left: auto; margin-right: auto; text-
 /* Mobile */
 @media (max-width: 760px) {
   .nav nav { display: none; }
+  .nav { display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; justify-items: center; gap: .5rem; }
   .hero { grid-template-columns: 1fr; min-height: 0; gap: 2rem; padding-top: 2.5rem; }
   .hero-photo { order: -1; }
   .hero-photo { width: min(78%, 280px); justify-self: center; }

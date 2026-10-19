@@ -1,18 +1,24 @@
 const root = document.documentElement;
 
-// Thème : préférence mémorisée, sinon celle du système
-try {
-  const saved = localStorage.getItem('theme');
-  if (saved) root.dataset.theme = saved;
-  else if (matchMedia('(prefers-color-scheme: dark)').matches) root.dataset.theme = 'dark';
-} catch (_) {}
+// Thème : suit par défaut le mode clair/sombre de l'appareil (et ses changements en direct).
+// Un choix manuel ne vaut que pour la session en cours.
+const systemDark = matchMedia('(prefers-color-scheme: dark)');
+const themeMeta = document.querySelector('meta[name="theme-color"]');
+const applyTheme = theme => {
+  root.dataset.theme = theme;
+  if (themeMeta) themeMeta.content = getComputedStyle(document.body).backgroundColor;
+};
+let manual = null;
+try { manual = sessionStorage.getItem('theme'); localStorage.removeItem('theme'); } catch (_) {}
+applyTheme(manual || (systemDark.matches ? 'dark' : 'light'));
+systemDark.addEventListener('change', e => { if (!manual) applyTheme(e.matches ? 'dark' : 'light'); });
 
 document.getElementById('theme').addEventListener('click', () => {
-  const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  manual = root.dataset.theme === 'dark' ? 'light' : 'dark';
   root.classList.add('theme-fade');
-  root.dataset.theme = next;
+  applyTheme(manual);
   setTimeout(() => root.classList.remove('theme-fade'), 900);
-  try { localStorage.setItem('theme', next); } catch (_) {}
+  try { sessionStorage.setItem('theme', manual); } catch (_) {}
 });
 
 // Changement de langue : on reste à la même position (même section, même avancement)
