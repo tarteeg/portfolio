@@ -351,17 +351,11 @@ section:not(.hero) .section-intro { margin-left: auto; margin-right: auto; text-
 }
 :root[data-theme="dark"] .yt-btn:hover, :root[data-theme="dark"] .sp-btn:hover { color: var(--accent); }
 
-/* Curseur : flèche aux couleurs du site (bleu), orange sur les éléments cliquables */
-:root {
-  --cur-default: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 2v15.5l4-3.6 2.7 6.1 2.6-1.1-2.6-6H15z' fill='%232f5d8a' stroke='%23ffffff' stroke-width='1.4' stroke-linejoin='round'/></svg>") 3 2, auto;
-  --cur-pointer: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 2v15.5l4-3.6 2.7 6.1 2.6-1.1-2.6-6H15z' fill='%23c9702b' stroke='%23ffffff' stroke-width='1.4' stroke-linejoin='round'/></svg>") 3 2, pointer;
-}
-:root[data-theme="dark"] {
-  --cur-default: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 2v15.5l4-3.6 2.7 6.1 2.6-1.1-2.6-6H15z' fill='%237fb0e0' stroke='%2311161d' stroke-width='1.4' stroke-linejoin='round'/></svg>") 3 2, auto;
-  --cur-pointer: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 2v15.5l4-3.6 2.7 6.1 2.6-1.1-2.6-6H15z' fill='%23e8975a' stroke='%2311161d' stroke-width='1.4' stroke-linejoin='round'/></svg>") 3 2, pointer;
-}
-html { cursor: var(--cur-default); }
-a, button, summary, label, select, [role="button"], .tl-card, .copy-mail { cursor: var(--cur-pointer) !important; }
+/* Curseur : flèche bleue aux couleurs du site, main orange sur les éléments cliquables */
+html { cursor: url("assets/cursors/default-light.png") 4 3, auto; }
+:root[data-theme="dark"] { cursor: url("assets/cursors/default-dark.png") 4 3, auto; }
+a, button, summary, label, select, [role="button"], .tl-card, .copy-mail { cursor: url("assets/cursors/pointer-light.png") 13 5, pointer !important; }
+:root[data-theme="dark"] :is(a, button, summary, label, select, [role="button"], .tl-card, .copy-mail) { cursor: url("assets/cursors/pointer-dark.png") 13 5, pointer !important; }
 
 /* Transition douce lors du changement de thème */
 .theme-fade, .theme-fade * { transition: background-color .8s ease, color .8s ease, border-color .8s ease, box-shadow .8s ease !important; }
