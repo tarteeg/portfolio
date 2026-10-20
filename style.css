@@ -238,13 +238,13 @@ section:not(.hero) .section-intro { margin-left: auto; margin-right: auto; text-
 .gh-btn {
   display: inline-flex; align-items: center; gap: .55rem; padding: .6rem 1.1rem; border-radius: 99px;
   background: var(--accent);
-  color: #fff; text-decoration: none; box-shadow: 0 4px 14px color-mix(in srgb, var(--accent) 40%, transparent);
-  transition: transform .2s, box-shadow .2s;
+  color: #fff; text-decoration: none;
+  transition: transform .2s;
 }
 :root[data-theme="dark"] .gh-btn { color: #0d1218; }
 .gh-btn svg { transition: transform .35s; }
 .gh-arrow { display: inline-block; transition: transform .2s; }
-.gh-btn:hover, .gh-btn:focus-visible { transform: translateY(-3px) scale(1.04); box-shadow: 0 8px 20px color-mix(in srgb, var(--accent-2) 45%, transparent); }
+.gh-btn:hover, .gh-btn:focus-visible { transform: translateY(-3px) scale(1.04); }
 .gh-btn:hover svg { transform: rotate(-12deg) scale(1.15); }
 .gh-btn:hover .gh-arrow { transform: translateX(4px); }
 .gh-btn:active { transform: translateY(0) scale(.98); }
