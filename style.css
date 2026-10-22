@@ -324,6 +324,7 @@ section:not(.hero) .section-intro { margin-left: auto; margin-right: auto; text-
 }
 .tl-card:hover, .tl-item.open .tl-card { box-shadow: var(--shadow); transform: translateX(3px); }
 .tl-when { grid-column: 1; font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--c); font-size: .8rem; font-weight: 500; }
+a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; font: inherit !important; }
 .tl-title { grid-column: 1; font-weight: 700; }
 .tl-sub { grid-column: 1; font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--muted); font-size: .8rem; }
 .tl-type {
