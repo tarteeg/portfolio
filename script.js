@@ -19,29 +19,28 @@ document.getElementById('theme').addEventListener('click', () => {
   try { sessionStorage.setItem('theme', manual); } catch (_) {}
 });
 
-// Changement de langue : on reste à la même position (même section, même avancement)
+// Changement de langue : on reste à la même position. Les textes FR/EN n'ont pas la même
+// longueur, donc on s'ancre sur le même élément (même structure DOM) avec son décalage en px.
 (() => {
-  const sections = [...document.querySelectorAll('main > section')];
-  const top = sec => sec.getBoundingClientRect().top + scrollY;
+  const blocks = () => [...document.querySelectorAll('main section, main h1, main h2, main h3, main p, main li, main article, main .btn')];
   const link = document.querySelector('.lang-switch a');
   const KEY = 'langScroll';
   if (link) link.addEventListener('click', () => {
-    const y = scrollY;
-    let i = sections.findIndex(sec => top(sec) + sec.offsetHeight > y + 1);
-    if (i < 0) i = sections.length - 1;
-    const sec = sections[i];
-    const ratio = Math.min(Math.max((y - top(sec)) / sec.offsetHeight, 0), 1);
-    try { sessionStorage.setItem(KEY, JSON.stringify({ i, ratio, t: Date.now() })); } catch (_) {}
+    const list = blocks();
+    const i = list.findIndex(el => el.getBoundingClientRect().bottom > 1);
+    if (i < 0) return;
+    const offset = -list[i].getBoundingClientRect().top;
+    try { sessionStorage.setItem(KEY, JSON.stringify({ i, offset, t: Date.now() })); } catch (_) {}
   });
   let saved = null;
   try {
     saved = JSON.parse(sessionStorage.getItem(KEY));
     sessionStorage.removeItem(KEY);
   } catch (_) {}
-  if (!saved || Date.now() - saved.t > 10000 || !sections[saved.i]) return;
+  const list = blocks();
+  if (!saved || Date.now() - saved.t > 10000 || !list[saved.i]) return;
   const restore = () => {
-    const sec = sections[saved.i];
-    scrollTo({ top: top(sec) + saved.ratio * sec.offsetHeight, behavior: 'instant' });
+    scrollTo({ top: list[saved.i].getBoundingClientRect().top + scrollY + saved.offset, behavior: 'instant' });
   };
   history.scrollRestoration = 'manual';
   restore();
