@@ -304,3 +304,21 @@ document.querySelectorAll('.copy-mail').forEach(btn => {
     document.documentElement.addEventListener('mouseleave', () => { mouse.active = false; mouse.nx = mouse.ny = 0; });
   }
 })();
+
+// Menu mobile
+(() => {
+  const btn = document.getElementById('menu-toggle');
+  const menu = document.getElementById('site-nav');
+  if (!btn || !menu) return;
+  const labels = { open: btn.getAttribute('aria-label'), close: document.documentElement.lang === 'en' ? 'Close menu' : 'Fermer le menu' };
+  const set = open => {
+    menu.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open);
+    btn.setAttribute('aria-label', open ? labels.close : labels.open);
+  };
+  btn.addEventListener('click', () => set(!menu.classList.contains('open')));
+  menu.addEventListener('click', e => { if (e.target.closest('a')) set(false); });
+  document.addEventListener('click', e => { if (!e.target.closest('.nav')) set(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') set(false); });
+  matchMedia('(min-width: 761px)').addEventListener('change', () => set(false));
+})();
